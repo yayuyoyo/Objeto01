@@ -7,20 +7,22 @@ IF NOT EXISTS m_user
 role VARCHAR
 (50));
 
-
--- create table if not exists w_data (
---     recordYear text,
---     recordMonth text,
---     recordDay text,
---     recordWeight DOUBLE
--- );
-
-CREATE TABLE IF NOT EXISTS w_data (
-    recordDate DATE,
-    recordWeight DOUBLE
-);
-
--- CREATE TABLE IF NOT EXISTS wa_data (
+-- CREATE TABLE
+-- IF NOT EXISTS w_data
+-- (
+--     id INT AUTO_INCREMENT,
 --     recordDate DATE,
---     recordWeight DOUBLE
+--     recordWeight DOUBLE,
+--     PRIMARY KEY
+-- (id)
 -- );
+
+CREATE TABLE
+IF NOT EXISTS w_data
+(
+    id INT AUTO_INCREMENT,
+    recordDate DATE,
+    recordWeight DOUBLE,
+    PRIMARY KEY
+(id)
+);

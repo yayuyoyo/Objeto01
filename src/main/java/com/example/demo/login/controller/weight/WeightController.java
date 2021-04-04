@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.login.domain.model.Record;
 import com.example.demo.login.domain.model.RecordForm;
 import com.example.demo.login.domain.service.WeightService;
 
@@ -20,7 +19,7 @@ public class WeightController {
 	WeightService weightService;
 
 	@GetMapping("/weight")
-	public String getWeight(Model model) {
+	public String getWeight(@ModelAttribute RecordForm recordForm, Model model) {
 
 		model.addAttribute("contents01", "login/weight :: weight_contents");
 
@@ -33,20 +32,46 @@ public class WeightController {
 		return "login/homeLayout";
 	}
 
-	@PostMapping(value = "/weight", params = "delete")
-	public String postWeightDelete(@ModelAttribute RecordForm recordForm, Model model) {
-
-		System.out.println("削除実行");
-
-//		boolean result = weightService.deleteOne(recordForm.getRecordYear());
+//	@PostMapping(value = "/weight", params = "delete")
+//	public String postWeightDelete(@ModelAttribute RecordForm recordForm, Model model) {
+//
+//		System.out.println("削除実行");
+//
+//		boolean result = weightService.deleteAll(recordForm.getConvertedDate());
 //
 //		if (result == true) {
-//			model.addAttribute("result", "削除OK");
 //			System.out.println("削除OK");
 //		} else {
-//			model.addAttribute("result", "削除NG");
 //			System.out.println("削除NG");
 //		}
+//
+//		return "redirect:/weight";
+//	}
+
+//	@RequestMapping(path = "/weight/{id}", method = RequestMethod.DELETE, params = "deleteOne")
+//	public String postWeightDeleteOne(@ModelAttribute RecordForm recordForm, @PathVariable("id") int recordId,
+//			Model model) {
+//
+//		boolean result = weightService.deleteOne(recordForm.getRecordId());
+//		if (result == true) {
+//			System.out.println("一件削除OK");
+//		} else {
+//			System.out.println("一件削除NG");
+//		}
+//
+//		return "redirect:/weight";
+//	}
+
+	@PostMapping(value = "/weight", params = "deleteOne")
+	public String postWeightDeleteOne(@ModelAttribute RecordForm recordForm, Model model) {
+
+		boolean result = weightService.deleteOne(recordForm.getRecordId());
+
+		if (result == true) {
+			System.out.println("一件削除OK");
+		} else {
+			System.out.println("一件削除NG");
+		}
 
 		return "redirect:/weight";
 	}
